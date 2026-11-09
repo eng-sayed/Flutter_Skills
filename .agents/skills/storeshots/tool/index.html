@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="مصمم صور المتاجر — أداة محلية لتجهيز صور Google Play وApp Store" />
+  <title>StoreShots — مصمم صور المتاجر</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" aria-label="StoreShots">
+      <img class="brand-mark" src="assets/logo.png" alt="شعار iCraftSA" />
+      <div><strong>StoreShots</strong><small>مصمم صور المتاجر</small></div>
+    </div>
+    <div class="top-actions">
+      <label class="preset-label" for="canvasPreset">مقاس التصميم</label>
+      <select id="canvasPreset">
+        <optgroup label="صور التطبيق الطولية">
+          <option value="1206x2622">App Store — Dynamic Island متوسط (1206×2622)</option>
+          <option value="1179x2556">App Store — Dynamic Island متوسط (1179×2556)</option>
+          <option value="1080x1920">Google Play — عمودي</option>
+          <option value="1080x1080">مربع — 1:1</option>
+        </optgroup>
+        <optgroup label="كفر صفحة التطبيق — عرضي">
+          <option value="5244x2950">Apple Header 16:9 — 5244×2950</option>
+          <option value="3840x1646">Apple Header 21:9 — 3840×1646</option>
+          <option value="1024x500">Google Play Feature Graphic — 1024×500</option>
+        </optgroup>
+      </select>
+      <select id="exportFormat" aria-label="صيغة التصدير">
+        <option value="jpeg" selected>JPG — حجم أصغر</option>
+        <option value="png">PNG — أعلى جودة</option>
+      </select>
+      <select id="exportQuality" aria-label="جودة التصدير">
+        <option value="0.92">جودة عالية</option>
+        <option value="0.82" selected>جودة متوازنة</option>
+        <option value="0.70">حجم صغير</option>
+        <option value="0.58">حجم صغير جدًا</option>
+      </select>
+      <button class="button ghost" id="saveProject" type="button">حفظ المشروع</button>
+      <label class="button ghost file-button" for="loadProject">فتح مشروع<input id="loadProject" type="file" accept="application/json,.storeshots" /></label>
+      <button class="button ghost" id="resetButton" type="button">إعادة ضبط</button>
+      <button class="button primary" id="exportButton" type="button">تنزيل الكل ZIP</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="inspector" aria-label="أدوات التصميم">
+      <section class="panel open">
+        <button class="panel-title" type="button" aria-expanded="true"><span><b>01</b> صورة التطبيق</span><i>−</i></button>
+        <div class="panel-body">
+          <label class="dropzone" for="screenshotInput">
+            <input id="screenshotInput" type="file" accept="image/png,image/jpeg,image/webp" multiple />
+            <span class="upload-icon" aria-hidden="true">↑</span>
+            <strong>ارفع Screenshot أو أكثر</strong>
+            <small>يمكنك اختيار عدة صور مرة واحدة</small>
+          </label>
+          <div class="inline-actions"><span id="imageStatus">لم تُرفع صور بعد</span><button id="removeScreenshot" class="text-button" type="button">حذف الحالية</button></div>
+          <div id="pageGallery" class="page-gallery" aria-label="صور المشروع"></div>
+          <label class="switch-row"><span>تعديل الصورة الحالية فقط</span><input id="editCurrentOnly" type="checkbox" role="switch" /></label>
+        </div>
+      </section>
+
+      <section class="panel open" id="coverPanel" hidden>
+        <button class="panel-title" type="button" aria-expanded="true"><span><b>02</b> إعدادات الكفر</span><i>−</i></button>
+        <div class="panel-body">
+          <label class="dropzone compact" for="coverLogoInput">
+            <input id="coverLogoInput" type="file" accept="image/png,image/jpeg,image/webp" />
+            <span class="upload-icon" aria-hidden="true">↑</span>
+            <strong>ارفع لوجو التطبيق</strong>
+            <small id="coverLogoStatus">PNG أو JPG</small>
+          </label>
+          <p class="cover-help" id="coverHelp">الكفر يستخدم أول صورتين من الصور المرفوعة ويضعهما داخل فريمَي موبايل.</p>
+          <div class="cover-spec" id="coverSpec" hidden>
+            <b>Feature graphic</b>
+            Your featured graphic must be a PNG or JPEG, up to 15 MB and 1024 px by 500 px. This graphic will be used when you choose to feature your app.
+          </div>
+          <div class="segments" aria-label="ترتيب الموبايلات">
+            <button class="active" type="button" data-cover-layout="angled">مائل</button>
+            <button type="button" data-cover-layout="parallel">متوازي</button>
+            <button type="button" data-cover-layout="stacked">متداخل</button>
+          </div>
+          <label class="range-field"><span>حجم الموبايلات <output id="coverPhoneScaleValue">82%</output></span><input id="coverPhoneScale" type="range" min="55" max="105" value="82" /></label>
+          <label class="range-field"><span>حجم اللوجو <output id="coverLogoScaleValue">22%</output></span><input id="coverLogoScale" type="range" min="8" max="34" value="22" /></label>
+          <div class="control-group"><strong>مكان اللوجو</strong>
+            <label class="range-field"><span>أفقي <output id="coverLogoXValue">20%</output></span><input id="coverLogoX" type="range" min="5" max="50" value="20" /></label>
+            <label class="range-field"><span>رأسي <output id="coverLogoYValue">42%</output></span><input id="coverLogoY" type="range" min="10" max="90" value="42" /></label>
+          </div>
+          <div class="control-group"><strong>الموبايل الأول</strong>
+            <label class="range-field"><span>أفقي <output id="coverPhone1XValue">57%</output></span><input id="coverPhone1X" type="range" min="25" max="90" value="57" /></label>
+            <label class="range-field"><span>رأسي <output id="coverPhone1YValue">54%</output></span><input id="coverPhone1Y" type="range" min="30" max="80" value="54" /></label>
+            <label class="range-field"><span>الميل <output id="coverPhone1RotationValue">-5°</output></span><input id="coverPhone1Rotation" type="range" min="-20" max="20" value="-5" /></label>
+          </div>
+          <div class="control-group"><strong>الموبايل الثاني</strong>
+            <label class="range-field"><span>أفقي <output id="coverPhone2XValue">76%</output></span><input id="coverPhone2X" type="range" min="25" max="95" value="76" /></label>
+            <label class="range-field"><span>رأسي <output id="coverPhone2YValue">58%</output></span><input id="coverPhone2Y" type="range" min="30" max="80" value="58" /></label>
+            <label class="range-field"><span>الميل <output id="coverPhone2RotationValue">5°</output></span><input id="coverPhone2Rotation" type="range" min="-20" max="20" value="5" /></label>
+          </div>
+          <label class="switch-row"><span>إظهار العنوان مع اللوجو</span><input id="coverShowHeadline" type="checkbox" checked role="switch" /></label>
+        </div>
+      </section>
+
+      <section class="panel open">
+        <button class="panel-title" type="button" aria-expanded="true"><span><b>02</b> فريم الموبايل</span><i>−</i></button>
+        <div class="panel-body">
+          <div class="frame-grid" role="radiogroup" aria-label="نوع فريم الموبايل">
+            <button class="frame-option selected" type="button" data-frame="island" role="radio" aria-checked="true"><span class="mini-phone island"></span><em>Dynamic</em></button>
+            <button class="frame-option" type="button" data-frame="notch" role="radio" aria-checked="false"><span class="mini-phone notch"></span><em>Notch</em></button>
+            <button class="frame-option" type="button" data-frame="android" role="radio" aria-checked="false"><span class="mini-phone android"></span><em>Android</em></button>
+            <button class="frame-option" type="button" data-frame="simple" role="radio" aria-checked="false"><span class="mini-phone simple"></span><em>بسيط</em></button>
+          </div>
+          <div class="field-row"><label for="frameColor">لون الجهاز</label><input id="frameColor" type="color" value="#d9eef1" /></div>
+          <label class="range-field"><span>الحجم <output id="scaleValue">78%</output></span><input id="deviceScale" type="range" min="45" max="105" value="78" /></label>
+          <label class="range-field"><span>الموضع الأفقي <output id="xValue">50%</output></span><input id="deviceX" type="range" min="10" max="90" value="50" /></label>
+          <label class="range-field"><span>الموضع الرأسي <output id="yValue">59%</output></span><input id="deviceY" type="range" min="20" max="90" value="59" /></label>
+          <label class="range-field"><span>الميل <output id="rotationValue">0°</output></span><input id="deviceRotation" type="range" min="-18" max="18" value="0" /></label>
+          <label class="switch-row"><span>ظل الجهاز</span><input id="deviceShadow" type="checkbox" checked role="switch" /></label>
+        </div>
+      </section>
+
+      <section class="panel open">
+        <button class="panel-title" type="button" aria-expanded="true"><span><b>05</b> قوالب سريعة</span><i>−</i></button>
+        <div class="panel-body">
+          <div class="template-grid">
+            <button type="button" data-template="fresh"><span class="template-swatch fresh"></span>منعش</button>
+            <button type="button" data-template="night"><span class="template-swatch night"></span>ليلي</button>
+            <button type="button" data-template="sunset"><span class="template-swatch sunset"></span>غروب</button>
+            <button type="button" data-template="clean"><span class="template-swatch clean"></span>بسيط</button>
+          </div>
+          <button class="button ghost wide" id="applyCurrentToAll" type="button">نسخ تصميم الحالية إلى الكل</button>
+        </div>
+      </section>
+
+      <section class="panel open">
+        <button class="panel-title" type="button" aria-expanded="true"><span><b>03</b> الخلفية</span><i>−</i></button>
+        <div class="panel-body">
+          <div class="segments" aria-label="نوع الخلفية">
+            <button type="button" data-background="solid">لون</button>
+            <button class="active" type="button" data-background="gradient">تدرّج</button>
+            <button type="button" data-background="image">صورة</button>
+          </div>
+          <div id="solidControls" hidden><div class="field-row"><label for="solidColor">لون الخلفية</label><input id="solidColor" type="color" value="#16b95c" /></div></div>
+          <div id="gradientControls">
+            <div class="color-pair"><label>اللون الأول<input id="gradientStart" type="color" value="#14c768" /></label><label>اللون الثاني<input id="gradientEnd" type="color" value="#068d73" /></label></div>
+            <label class="range-field"><span>اتجاه التدرّج <output id="gradientValue">135°</output></span><input id="gradientAngle" type="range" min="0" max="360" value="135" /></label>
+          </div>
+          <div id="imageControls" hidden>
+            <label class="small-upload" for="backgroundInput">اختيار صورة خلفية<input id="backgroundInput" type="file" accept="image/png,image/jpeg,image/webp" /></label>
+            <label class="range-field"><span>تمويه الخلفية <output id="blurValue">0</output></span><input id="backgroundBlur" type="range" min="0" max="24" value="0" /></label>
+          </div>
+          <div class="decoration-grid" role="radiogroup" aria-label="شكل الزخارف">
+            <button class="selected" type="button" data-decoration="rings" role="radio" aria-checked="true"><i class="decor-icon rings"></i>دوائر</button>
+            <button type="button" data-decoration="dots" role="radio" aria-checked="false"><i class="decor-icon dots"></i>نقاط</button>
+            <button type="button" data-decoration="waves" role="radio" aria-checked="false"><i class="decor-icon waves"></i>موجات</button>
+            <button type="button" data-decoration="geometry" role="radio" aria-checked="false"><i class="decor-icon geometry"></i>هندسي</button>
+            <button type="button" data-decoration="confetti" role="radio" aria-checked="false"><i class="decor-icon confetti"></i>كونفيتي</button>
+            <button type="button" data-decoration="none" role="radio" aria-checked="false"><i class="decor-icon none">×</i>بدون</button>
+          </div>
+          <div class="color-pair"><label>لون الزخارف<input id="decorationColor" type="color" value="#ffffff" /></label><label>الشفافية<input id="decorationOpacity" type="number" min="5" max="100" value="45" /></label></div>
+        </div>
+      </section>
+
+      <section class="panel open">
+        <button class="panel-title" type="button" aria-expanded="true"><span><b>04</b> العنوان</span><i>−</i></button>
+        <div class="panel-body">
+          <label class="text-field">النص<textarea id="headline" rows="2">كل ما تحتاجه… في تطبيق واحد</textarea></label>
+          <div class="color-pair"><label>لون النص<input id="headlineColor" type="color" value="#ffffff" /></label><label>الحجم<input id="headlineSize" type="number" min="40" max="160" value="78" /></label></div>
+          <label class="range-field"><span>موضع العنوان <output id="headlineYValue">12%</output></span><input id="headlineY" type="range" min="5" max="45" value="12" /></label>
+          <label class="switch-row"><span>إظهار العنوان</span><input id="headlineVisible" type="checkbox" checked role="switch" /></label>
+        </div>
+      </section>
+    </aside>
+
+    <section class="stage" aria-label="معاينة التصميم">
+      <div class="stage-toolbar"><span><i class="status-dot"></i> <span id="pageIndicator">معاينة مباشرة</span></span><span id="zoomLabel">34%</span></div>
+      <div class="canvas-wrap"><canvas id="designCanvas" width="1206" height="2622" aria-label="معاينة صورة المتجر"></canvas></div>
+      <p class="privacy-note" id="stageHint">اسحب الموبايل أو العنوان مباشرة لتغيير مكانهما — الصور تظل على جهازك.</p>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
