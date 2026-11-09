@@ -12,6 +12,8 @@ Branch: **`icraft`**
 | `prod` | `/prod` · release | iOS archive then (on request) Android appbundle |
 | `build_test` | `/build_test` · ارفع تيست | Android APK → Firebase App Distribution (`testers`) |
 | `build-new-app` | `/build-new-app` · اعمل اب جديد | Scaffold from `flutter_clean_arch_base` |
+| `clone` | `/clone` · كلون | Clone from iCraft GitLab + unified keystore |
+| `codex-plan` | `/codex-plan` · `cp:` | Codex plans (read-only), Cursor executes |
 
 Canonical files live in **`.agents/skills/`** (Codex + Cursor).  
 `.claude/skills/`, `.cursor/skills/`, and `.codex/skills/` are **symlinks** to the same folders so opening this repo in any of those tools loads the skills.
@@ -32,7 +34,7 @@ cd Flutter_Skills
 | Claude Code | `~/.claude/skills/` | `.claude/skills/` |
 | Codex | `~/.agents/skills/` · `~/.codex/skills/` | `.agents/skills/` · `.codex/skills/` |
 
-Restart the app/CLI after install. Then invoke `/prod`, `/build_test`, `/build-new-app`, or `/storeshots`.
+Restart the app/CLI after install. Then invoke `/prod`, `/build_test`, `/build-new-app`, `/clone`, `/codex-plan`, or `/storeshots`.
 
 `storeshots` also needs Python once: `install.sh` runs its `setup.sh` (`pillow` + Playwright Chromium).
 
@@ -44,6 +46,8 @@ Restart the app/CLI after install. Then invoke `/prod`, `/build_test`, `/build-n
   prod/
   build_test/
   build-new-app/
+  clone/
+  codex-plan/
 .claude/skills/ → symlink
 .cursor/skills/ → symlink
 .codex/skills/  → symlink
@@ -55,3 +59,4 @@ install.sh
 - Paths use `$HOME/Desktop/projects` and `$HOME/Downloads` — not a specific username.
 - `storeshots`: copy the **whole folder** (`tool/` is required). Do not send `SKILL.md` alone.
 - `build-new-app` expects the base repo at `$HOME/Desktop/projects/flutter_clean_arch_base`.
+- `clone` fetches from `git.aait.cloud/icraftsa/flutter/sayed-ashraf/`.

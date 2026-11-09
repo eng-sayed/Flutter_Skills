@@ -1,0 +1,45 @@
+# query	user_slug	provider_slug
+# provider_slug is "-" when that app does not exist.
+# Append a row only after git ls-remote confirms the slug.
+زينلي	aa54422-zaienly-user	aa54422-zaienly-provider
+zaienly	aa54422-zaienly-user	aa54422-zaienly-provider
+zainli	aa54422-zaienly-user	aa54422-zaienly-provider
+zienly	aa54422-zaienly-user	aa54422-zaienly-provider
+الزبيدي	aa60079-zebedi-user	aa60079-zebedi-provider
+zebedi	aa60079-zebedi-user	aa60079-zebedi-provider
+zubaidi	aa60079-zebedi-user	aa60079-zebedi-provider
+zubedi	aa60079-zebedi-user	aa60079-zebedi-provider
+فاتورتك	cs45783-fatoratak	-
+fatoratak	cs45783-fatoratak	-
+معك	maak-cs54497	-
+maak	maak-cs54497	-
+maak-cs54497	maak-cs54497	-
+cs54497	maak-cs54497	-
+medilink	cs58784-medlink	-
+medlink	cs58784-medlink	-
+ميد لينك	cs58784-medlink	-
+cs58784-medlink	cs58784-medlink	-
+مواجيب	aa59677-mawaajeeb-user	aa59677-mawaajeeb-provider
+mawaajeeb	aa59677-mawaajeeb-user	aa59677-mawaajeeb-provider
+mawajeb	aa59677-mawaajeeb-user	aa59677-mawaajeeb-provider
+mawajib	aa59677-mawaajeeb-user	aa59677-mawaajeeb-provider
+كاش باك	aa56936-cashback	-
+cashback	aa56936-cashback	-
+aa56936-cashback	aa56936-cashback	-
+سماعتي	aa56469-samaaty	aa56469-samaaty-provider
+سماعتي كير	aa56469-samaaty	aa56469-samaaty-provider
+samaaty	aa56469-samaaty	aa56469-samaaty-provider
+samaati	aa56469-samaaty	aa56469-samaaty-provider
+aa56469-samaaty	aa56469-samaaty	aa56469-samaaty-provider
+اي كار	icar-aa45000	-
+ايكار	icar-aa45000	-
+icar	icar-aa45000	-
+i-car	icar-aa45000	-
+i car	icar-aa45000	-
+icar-aa45000	icar-aa45000	-
+aa45000	icar-aa45000	-
+توازن	tawazon-2429	-
+tawazon	tawazon-2429	-
+tawazun	tawazon-2429	-
+tawazon-2429	tawazon-2429	-
+2429	tawazon-2429	-
