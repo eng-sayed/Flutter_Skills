@@ -34,4 +34,4 @@ fi
 
 echo
 echo "OK. Restart Cursor / Claude Code / Codex."
-echo "Skills: storeshots, prod, build_test"
+echo "Skills: $(ls -1 "$SRC" | paste -sd ' ' -)"

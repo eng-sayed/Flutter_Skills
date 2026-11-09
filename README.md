@@ -2,8 +2,8 @@
 
 Agent Skills for Flutter work. Same `SKILL.md` format on **Cursor**, **Claude Code**, and **Codex**.
 
-Branch: **`main`** — public pack (`storeshots`, `prod`, `build_test`).  
-iCraft-only scaffolding (`build-new-app`) lives on branch **`icraft`**.
+Branch: **`main`** — public pack (`storeshots`, `prod`, `build_test`, `codex-plan`).  
+iCraft-only skills (`build-new-app`, `clone`) live on branch **`icraft`**.
 
 ## Skills on this branch
 
@@ -12,6 +12,7 @@ iCraft-only scaffolding (`build-new-app`) lives on branch **`icraft`**.
 | `storeshots` | `/storeshots` · سكرينات الاستور | App Store + Play screenshots, Feature Graphic, 512 icon, listing copy |
 | `prod` | `/prod` · release | iOS archive then (on request) Android appbundle |
 | `build_test` | `/build_test` · ارفع تيست | Android APK → Firebase App Distribution (`testers`) |
+| `codex-plan` | `/codex-plan` · `cp:` | Codex plans (read-only), Cursor executes |
 
 Canonical files live in **`.agents/skills/`** (Codex + Cursor).  
 `.claude/skills/`, `.cursor/skills/`, and `.codex/skills/` are **symlinks** to the same folders so opening this repo in any of those tools loads the skills.
@@ -32,7 +33,7 @@ cd Flutter_Skills
 | Claude Code | `~/.claude/skills/` | `.claude/skills/` |
 | Codex | `~/.agents/skills/` · `~/.codex/skills/` | `.agents/skills/` · `.codex/skills/` |
 
-Restart the app/CLI after install. Then invoke `/prod`, `/build_test`, or `/storeshots`.
+Restart the app/CLI after install. Then invoke `/prod`, `/build_test`, `/codex-plan`, or `/storeshots`.
 
 `storeshots` also needs Python once: `install.sh` runs its `setup.sh` (`pillow` + Playwright Chromium).
 
@@ -43,6 +44,7 @@ Restart the app/CLI after install. Then invoke `/prod`, `/build_test`, or `/stor
   storeshots/            ← includes tool/ HTML + fonts + scripts
   prod/
   build_test/
+  codex-plan/
 .claude/skills/ → symlink
 .cursor/skills/ → symlink
 .codex/skills/  → symlink

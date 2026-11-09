@@ -4,4 +4,4 @@ Claude Code loads project skills from `.claude/skills/` (symlinked to `.agents/s
 
 For every project on this machine: `./install.sh` → `~/.claude/skills/`.
 
-Skills: `storeshots`, `prod`, `build_test`.
+Skills: `storeshots`, `prod`, `build_test`, `codex-plan`.
